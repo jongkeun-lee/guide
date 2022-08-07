@@ -1,0 +1,258 @@
+.inner {
+  width: 1200px;
+  margin: 0 auto;
+}
+header {
+  .hd1Wrap {
+    background-color: $colorG3;
+    .inner {
+      @include dfWrap;
+    }
+    .menu1Box > ul {
+      @include dfWrap;
+      &>li+li {
+        border-left: $colorW solid 1px;
+      }
+      a, button {
+        height: 30px;
+        color: $colorG1; font-size: 1.4rem;
+        &.c1 {
+          background-color: $colorP1;
+          color: $colorW;
+        }
+        &.c2 {
+          background-color: $colorG1;
+          color: $colorW;
+        }
+      }
+    }
+    .right {
+      @include dfWrap;
+    }
+    .menu2Box > ul {
+      @include dfWrap;
+      &>li+li {
+        position: relative;
+        &::before {
+          content:'';
+          @include paArea($t: 50%, $y: -50%);
+          width: 1px; height: 15px;
+          background-color: $colorG2;
+        }
+      }
+      a, button {
+        height: 30px;
+        color: $colorG1; font-size: 1.4rem;
+      }
+    }
+    .fontBox {
+      @include dfWrap($g: 5px);
+      margin-left: 50px;
+      font-size: 1.4rem;
+      button {
+        width: 18px; height: 18px;
+        border: $colorB solid 1px;
+        border-radius: 50%;
+        &:disabled {
+          border-color: $colorG1;
+          color: $colorG1;
+        }
+      }
+    }
+  }
+  .hd2Wrap {
+    .inner {
+      @include dfWrap;
+    }
+    .right {
+      @include dfWrap;
+    }
+    .menu3Box > ul {
+      @include dfWrap;
+    }
+  }
+  .hd3Wrap {
+    .gnbArea .gnb > ul {
+      @include dfWrap($j: space-around, $g: 30px);
+      .d2Area {
+        display: none;
+      }
+    }
+  }
+}
+
+main {
+  .visWrap {
+    min-height: 200px;
+    background-color: $colorP1;
+  }
+  .recWrap {
+    @include dfWrap($g: 20px);
+    @include seSpace($s: 50px);
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex: 2;
+
+      .recArea {
+        @include dfWrap($g: 20px);
+        .left {
+          flex: 1;
+        }
+        .right {
+          flex: 1;
+        }
+      }
+    }
+  }
+  .proWrap {
+    @include seSpace($s: 50px);
+
+    .proSlide>ul {
+      @include dfWrap($g: 20px);
+    }
+  }
+  .serWrap {
+    @include seSpace($s: 50px);
+
+    .col4Area {
+      @include dfWrap($g: 20px);
+    }
+    .bnrArea {
+      @include seSpace($s: 50px);
+    }
+  }
+
+  .col2Area {
+    @include dfWrap($a: flex-start, $g: 20px);
+  }
+  .notWrap {
+    flex: 1;
+    @include seSpace($s: 50px);
+  }
+  .cusWrap  {
+    flex: 1;
+    @include seSpace($s: 50px);
+  }
+
+
+
+  // 공통
+  .titArea {
+    @include dfWrap($g: 20px);
+  }
+
+  .bnrArea {
+    &>ul {
+      @include dfWrap($w: wrap, $g: 20px);
+      &>li {
+        width: calc(50% - 10px);
+      }
+      .bnr {
+        @include dfWrap($g:10px);
+        border: $colorG2 solid 1px;
+        border-radius: 20px;
+        padding: 20px 20px;
+        min-height: 100px;
+        .tit {
+          font-size: 1.6rem;
+          color: $colorP1;
+        }
+        .exp {
+          font-size: 1.4rem;
+          color: $colorG1;
+        }
+        .txt {
+          flex-grow: 1;
+          @include dfWrap($d: column, $a: flex-start, $g: 10px,);
+        }
+        .ico {
+          @include dfWrap();
+          width: 100px;
+          height: 100px;
+          // border-radius: 50%;
+          // overflow: hidden;
+          flex-shrink: 0;
+        }
+        &.icoL::before {
+          content: '';
+          display: block;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          overflow: hidden;
+          @include bgStyle;
+          background-color: $colorG3;
+          flex-shrink: 0;
+        }
+        &.icoL.icoBg1::before {
+          background-image: url(../images/image_0007_1024x800.png);
+        }
+        &.icoR::after {
+          content: '';
+          display: block;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          overflow: hidden;
+          @include bgStyle;
+          background-color: $colorG3;
+          flex-shrink: 0;
+        }
+        &.icoR.icoBg1::after {
+          background-image: url(../images/image_0008_1440x1200.png);
+        }
+        &.arr::after {
+          content: '';
+          display: block;
+          width: 10px;
+          height: 10px;
+          border-top: 1px solid $colorG1;
+          border-right: 1px solid $colorG1;
+          transform: rotate(45deg) translateY(-50%);
+          margin-top: 5px;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}
+
+aside {
+  position: fixed;
+  bottom: 200px; right: 20px;
+  .as2Wrap {
+    text-align: center;
+    .topBtn {
+      width: 50px; height: 50px;
+      background-color: $colorP2;
+      border-radius: 50%
+    }
+  }
+}
+
+footer {
+  .fnb>ul {
+    @include dfWrap;
+  }
+  .ft2Wrap {
+    .inner {
+      @include dfWrap;
+
+      .fnb2 {
+        @include dfWrap($g: 20px);
+      }
+    }
+  }
+}
+
+// common template
+.list1 {
+}
+.list2 {
+}
+.nodata {
+}
