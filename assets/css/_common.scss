@@ -1,3 +1,4 @@
+// common template
 .inner {
   width: 1200px;
   margin: 0 auto;
@@ -5,6 +6,97 @@
     width: 100%;
   }
 }
+
+.dotList {
+  &>li {
+    display: block;
+    position: relative;
+    padding-left: 2rem;
+    &::before {
+      content:'';
+      display: block;
+      width: 5px; height: 5px;
+      background-color: $colorB;
+      border-radius: 5px;
+      @include paArea($t: 0.5em, $l: 0.5rem);
+    }
+  }
+}
+.hypList {
+  &>li {
+    display: block;
+    position: relative;
+    padding-left: 2rem;
+    &::before {
+      content:'';
+      display: block;
+      width: 5px; height: 5px;
+      background-color: $colorB;
+      border-radius: 5px;
+      @include paArea($t: 0.75rem, $l: 0.5rem);
+    }
+  }
+}
+.nodata {
+  // nodata content
+}
+.titArea {
+  @include dfWrap($g: 20px);
+}
+.bnr {
+  @include biBox;
+  flex-wrap: nowrap;
+  height: 100%;
+  .ico {
+    @include dfWrap();
+    width: 100px;
+    // height: 100px;
+    // border-radius: 50%;
+    // overflow: hidden;
+    flex-shrink: 0;
+  }
+  &.icoL::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    @include bgStyle;
+    background-color: $colorG3;
+    flex-shrink: 0;
+  }
+  &.icoL.icoBg1::before {
+    background-image: url(../images/image_0007_1024x800.png);
+  }
+  &.icoR::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    @include bgStyle;
+    background-color: $colorG3;
+    flex-shrink: 0;
+  }
+  &.icoR.icoBg1::after {
+    background-image: url(../images/image_0008_1440x1200.png);
+  }
+  &.arr::after {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid $colorG1;
+    border-right: 1px solid $colorG1;
+    transform: rotate(45deg) translateY(-50%);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+}
+
+
 header {
   .hd1Wrap {
     background-color: $colorG3;
@@ -14,7 +106,7 @@ header {
         @include dfWrap;
       }
     }
-    .menu1Box > ul {
+    .hnb1Box > ul {
       @include dfWrap;
       &>li+li {
         border-left: $colorW solid 1px;
@@ -32,7 +124,7 @@ header {
         }
       }
     }
-    .menu2Box > ul {
+    .hnb2Box > ul {
       @include dfWrap;
       &>li+li {
         position: relative;
@@ -71,7 +163,7 @@ header {
         @include dfWrap;
       }
     }
-    .menu3Box > ul {
+    .hnb3Box > ul {
       @include dfWrap;
       &>li+li {
         position: relative;
@@ -173,6 +265,8 @@ main {
   }
   .proWrap {
     @include inSpace($s: 50px);
+    background-color: $colorG3;
+    padding: 50px 0;
     .proArea {
       @include inSpace($s: 20px);
     }
@@ -185,6 +279,7 @@ main {
     }
     .aBox {
       @include biBox;
+      background-color: $colorW;
     }
   }
   .serWrap {
@@ -203,6 +298,9 @@ main {
     }
     .bnrArea {
       @include inSpace($s: 50px);
+      &>ul {
+        @include colList($c: 2, $g: 20px);
+      }
     }
   }
 
@@ -235,77 +333,11 @@ main {
       }
     }
   }
-
-
-
-  // 공통
-  .titArea {
-    @include dfWrap($g: 20px);
-  }
-
-  .bnrArea {
-    &>ul {
-      @include colList($c: 2, $g: 20px);
-
-      .bnr {
-        @include biBox;
-        flex-wrap: nowrap;
-        height: 100%;
-        .ico {
-          @include dfWrap();
-          width: 100px;
-          // height: 100px;
-          // border-radius: 50%;
-          // overflow: hidden;
-          flex-shrink: 0;
-        }
-        &.icoL::before {
-          content: '';
-          display: block;
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          overflow: hidden;
-          @include bgStyle;
-          background-color: $colorG3;
-          flex-shrink: 0;
-        }
-        &.icoL.icoBg1::before {
-          background-image: url(../images/image_0007_1024x800.png);
-        }
-        &.icoR::after {
-          content: '';
-          display: block;
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          overflow: hidden;
-          @include bgStyle;
-          background-color: $colorG3;
-          flex-shrink: 0;
-        }
-        &.icoR.icoBg1::after {
-          background-image: url(../images/image_0008_1440x1200.png);
-        }
-        &.arr::after {
-          content: '';
-          display: block;
-          width: 10px;
-          height: 10px;
-          border-top: 1px solid $colorG1;
-          border-right: 1px solid $colorG1;
-          transform: rotate(45deg) translateY(-50%);
-          margin-top: 5px;
-          flex-shrink: 0;
-        }
-      }
-    }
-  }
 }
 
 aside {
   position: fixed;
-  bottom: 200px; right: 20px;
+  bottom: 300px; right: 20px;
   .as2Wrap {
     text-align: center;
     .topBtn {
@@ -317,50 +349,52 @@ aside {
 }
 
 footer {
-  .fnb>ul {
+  .ft1Wrap {
+    border-top: $colorG2 solid 2px;
+    border-bottom: $colorG2 solid 1px;
+  }
+
+  .fnb1>ul {
     @include dfWrap;
+    padding: 10px 0;
+    &>li {
+      flex: 1;
+      border-right: $colorG3 solid 1px;
+      &:first-child {
+        border-left: $colorG3 solid 1px;
+      }
+    }
+    a, button {
+      height: 40px;
+      color: $colorB; font-size: 1.6rem; font-weight: bold;
+    }
   }
   .ft2Wrap {
     .inner {
-      @include dfWrap;
+      @include dfWrap($a: stretch, $g: 20px);
+      @include inSpace($s: 50px);
 
-      .fnb2 {
+      .fnb2 > ul {
         @include dfWrap($g: 20px);
+      }
+
+      .infoArea {
+        @include inSpace($s: 30px);
+        @include inSpace($s: 50px, $d: bottom);
+        @include colArea($c: 1, $g: 10px);
+        font-size: 1.4rem;
+      }
+
+      .snsArea > ul {
+        @include dfWrap($g: 20px);
+        a, button {
+          @include dfWrap($j: center);
+          width: 50px; height: 50px;
+          background-color: $colorG2;
+          border-radius: 50%;
+        }
       }
     }
   }
 }
 
-// common template
-.dotList {
-  &>li {
-    display: block;
-    position: relative;
-    padding-left: 2rem;
-    &::before {
-      content:'';
-      display: block;
-      width: 5px; height: 5px;
-      background-color: $colorB;
-      border-radius: 5px;
-      @include paArea($t: 0.5em, $l: 0.5rem);
-    }
-  }
-}
-.hypList {
-  &>li {
-    display: block;
-    position: relative;
-    padding-left: 2rem;
-    &::before {
-      content:'';
-      display: block;
-      width: 5px; height: 5px;
-      background-color: $colorB;
-      border-radius: 5px;
-      @include paArea($t: 0.75rem, $l: 0.5rem);
-    }
-  }
-}
-.nodata {
-}
