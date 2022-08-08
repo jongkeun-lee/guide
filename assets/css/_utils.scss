@@ -301,8 +301,8 @@ $breakpoint-min: 640px;
 /* jk */
 // var
 $colorP1: #1976d2;
-$colorP2: #bbdefb;
-$colorP3: #2196f3;
+$colorP2: #2196f3;
+$colorP3: #bbdefb;
 $colorB1: #cddc39;
 $colorW: #fff;
 $colorB: #000;
@@ -311,14 +311,47 @@ $colorG2: #bdbdbd;
 $colorG3: #eee;
 
 // mixin
-@mixin dfWrap($d: row, $j: space-between, $a: center, $w: nowrap, $g: 0) {
+@mixin dfWrap($d: row, $j: space-between, $a: center, $w: wrap, $g: 0) {
   display: flex;
   flex-direction: $d; // row column
-  justify-content: $j; // space-around space-evenly space-between center flex-start flex-end
+  justify-content: $j; // space-around space-evenly space-between center flex-start flex-end stretch
   align-items: $a; // center flex-start flex-end
   flex-wrap: $w;
   gap: $g;
 }
+
+@mixin colList($c: 2, $g: 20px) {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: $g;
+  &>* {
+    width: calc( ( 100% - (#{$g}*(#{$c} - 1)) ) / #{$c} );
+  }
+}
+
+@mixin colArea($c: 2, $g: 20px) {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: $g;
+  &>* {
+    width: calc( ( 100% - (#{$g}*(#{$c} - 1)) ) / #{$c} );
+  }
+}
+
+/*@for $i from 1 to 6 {
+  .col#{$i}Area {
+    @include dfWrap($j: space-between, $a: stretch);
+    &>* {
+      width: calc( ( 100% - (20px*(#{$i} - 1)) ) / #{$i} );
+    }
+  }
+}*/
 
 @mixin dgWrap($c: 3, $g: 10px) {
   display: grid;
@@ -342,10 +375,30 @@ $colorG3: #eee;
   background-size: $s; // contain cover
 }
 
-@mixin seSpace($s:0) {
-  margin-top: $s;
+@mixin inSpace($s:0, $d: top) {
+  margin-#{$d}: $s;
   @include respond-to(medium) {
-    margin-top: $s / 2;
+    margin-#{$d}: $s / 2;
+  }
+}
+
+@mixin biBox {
+  @include dfWrap($g:10px);
+  border: $colorG2 solid 1px;
+  border-radius: 20px;
+  padding: 20px 20px;
+  min-height: 100px;
+  .txt {
+    flex-grow: 1;
+    @include dfWrap($d: column, $a: flex-start, $g: 10px,);
+  }
+  .tit {
+    font-size: 1.6rem;  font-weight: bold;
+    color: $colorP1;
+  }
+  .exp {
+    font-size: 1.4rem;
+    color: $colorG1;
   }
 }
 
