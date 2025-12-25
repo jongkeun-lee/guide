@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .accordion {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .doc-item {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .doc-header {
+      background-color: #f0f0f0;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .doc-header-button {
+      width: 100%;
+    }
+    .doc-content {
+      display: block;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+    }
+    .doc-item.open .doc-content {
+    }
+    .doc-item[data-agree="true"] .doc-header {
+      background-color: #e0e0e0;
+    }
+    .doc-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+    .select-all {
+      background-color: #f0f0f0;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .select-all:hover {
+      background-color: #e0e0e0;
+    }
+    .select-all:active {
+      background-color: #d0d0d0;
+    }
+    .select-all:focus {
+      outline: none;
+    }
+    .select-all:disabled {
+      background-color: #f0f0f0;
+      cursor: not-allowed;
+    }
+    .select-all:disabled:hover {
+      background-color: #f0f0f0;
+      cursor: not-allowed;
+    }
+    .select-all:disabled:active {
+      background-color: #f0f0f0;
+      cursor: not-allowed;
+    }
+    .select-all:disabled:focus {
+      outline: none;
+    }
+    .select-all:disabled:disabled {
+      background-color: #f0f0f0;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f0f0f0;
+      padding: 10px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    section {
+      padding-top: 50px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Accordion</h1>
+  </header>
+  <section class="accordion">
+    <article class="doc-item" data-agree="false">
+      <div class="doc-header">
+        <button class="doc-header-button">Accordion Item 1</button>
+      </div>
+      <div class="doc-content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        <button class="select-all">select all</button>
+        <ul>
+          <li>
+            <input type="radio" name="item1-agree" id="item1-agree-1">
+            <label for="item1-agree-1">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item1-agree" id="item1-agree-2">
+            <label for="item1-agree-2">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item1-agree" id="item1-agree-3">
+            <label for="item1-agree-3">Doc Content Item 1</label>
+          </li>
+        </ul>
+        <div class="doc-footer">
+          <input type="checkbox" name="item1-footer" id="item1-footer-1">
+          <label for="item1-footer-1">confirm</label>
+        </div>
+      </div>
+    </article>
+    <article class="doc-item" data-agree="false">
+      <div class="doc-header">
+        <button class="doc-header-button">Accordion Item 2</button>
+      </div>
+      <div class="doc-content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        <button class="select-all">select all</button>
+        <ul>
+          <li>
+            <input type="radio" name="item2-agree" id="item2-agree-1">
+            <label for="item2-agree-1">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item2-agree" id="item2-agree-2">
+            <label for="item2-agree-2">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item2-agree" id="item2-agree-3">
+            <label for="item2-agree-3">Doc Content Item 1</label>
+          </li>
+        </ul>
+        <div class="long-text">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        </div>
+        <div class="doc-footer">
+          <input type="checkbox" name="item2-footer" id="item2-footer-1">
+          <label for="item2-footer-1">confirm</label>
+        </div>
+      </div>
+    </article>
+    <article class="doc-item" data-agree="false">
+      <div class="doc-header">
+        <button class="doc-header-button">Accordion Item 3</button>
+      </div>
+      <div class="doc-content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        <button class="select-all">select all</button>
+        <ul>
+          <li>
+            <input type="radio" name="item3-agree" id="item3-agree-1">
+            <label for="item3-agree-1">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item3-agree" id="item3-agree-2">
+            <label for="item3-agree-2">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item3-agree" id="item3-agree-3">
+            <label for="item3-agree-3">Doc Content Item 1</label>
+          </li>
+        </ul>
+        <div class="long-text">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        </div>
+        <div class="doc-footer">
+          <input type="checkbox" name="item3-footer" id="item3-footer-1">
+          <label for="item3-footer-1">confirm</label>
+        </div>
+      </div>
+    </article>
+    <article class="doc-item" data-agree="false">
+      <div class="doc-header">
+        <button class="doc-header-button">Accordion Item 4</button>
+      </div>
+      <div class="doc-content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        <button class="select-all">select all</button>
+        <ul>
+          <li>
+            <input type="radio" name="item4-agree" id="item4-agree-1">
+            <label for="item4-agree-1">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item4-agree" id="item4-agree-2">
+            <label for="item4-agree-2">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item4-agree" id="item4-agree-3">
+            <label for="item4-agree-3">Doc Content Item 1</label>
+          </li>
+        </ul>
+        <div class="doc-footer">
+          <input type="checkbox" name="item4-footer" id="item4-footer-1">
+          <label for="item4-footer-1">confirm</label>
+        </div>
+      </div>
+    </article>
+    <article class="doc-item" data-agree="false">
+      <div class="doc-header">
+        <button class="doc-header-button">Accordion Item 5</button>
+      </div>
+      <div class="doc-content">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        <button class="select-all">select all</button>
+        <ul>
+          <li>
+            <input type="radio" name="item5-agree" id="item5-agree-1">
+            <label for="item5-agree-1">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item5-agree" id="item5-agree-2">
+            <label for="item5-agree-2">Doc Content Item 1</label>
+          </li>
+          <li>
+            <input type="radio" name="item5-agree" id="item5-agree-3">
+            <label for="item5-agree-3">Doc Content Item 1</label>
+          </li>
+        </ul>
+        <div class="doc-footer">
+          <input type="checkbox" name="item5-footer" id="item5-footer-1">
+          <label for="item5-footer-1">confirm</label>
+        </div>
+      </div>
+    </article>
+  </section>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const docItems = document.querySelectorAll('.doc-item');
+  const buttons = document.querySelectorAll('.doc-header-button');
+  const accordionSection = document.querySelector('.accordion');
+  
+  // 각 doc-content의 높이를 설정하는 함수
+  function setContentHeight(item) {
+    const content = item.querySelector('.doc-content');
+    if (!content) return;
+    
+    if (item.classList.contains('open')) {
+      // 열림: 실제 높이로 설정
+      content.style.height = content.scrollHeight + 'px';
+    } else {
+      // 닫힘: 0으로 설정
+      content.style.height = '0px';
+    }
+  }
+  
+  // 상단 header 높이를 가져오는 함수
+  function getHeaderHeight() {
+    const header = document.querySelector('header');
+    if (header) {
+      return header.offsetHeight;
+    }
+    return 0;
+  }
+  
+  // item을 맨 위로 스크롤하는 함수 (애니메이션 후 실행, header 높이 고려)
+  function scrollToItem(item) {
+    if (!accordionSection) return;
+    
+    // CSS transition 시간(0.3초) 후에 스크롤 실행
+    setTimeout(function() {
+      const headerHeight = getHeaderHeight();
+      const accordionRect = accordionSection.getBoundingClientRect();
+      const itemRect = item.getBoundingClientRect();
+      
+      // .accordion 내부에서 item의 상대적 위치 계산
+      const itemOffsetTop = itemRect.top - accordionRect.top + accordionSection.scrollTop;
+      
+      // header 높이를 고려한 최종 스크롤 위치
+      const targetScrollTop = itemOffsetTop - headerHeight;
+      
+      accordionSection.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    }, 300);
+  }
+  
+  // 초기 높이 설정
+  docItems.forEach(function(item) {
+    const content = item.querySelector('.doc-content');
+    if (content) {
+      if (item.classList.contains('open')) {
+        content.style.height = content.scrollHeight + 'px';
+      } else {
+        content.style.height = '0px';
+      }
+    }
+  });
+  
+  // 처음엔 첫 번째 item만 열림 상태
+  if (docItems.length > 0) {
+    docItems[0].classList.add('open');
+    setContentHeight(docItems[0]);
+  }
+  
+  // 각 버튼에 클릭 이벤트 추가
+  buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      const currentItem = this.closest('.doc-item');
+      const isOpen = currentItem.classList.contains('open');
+      
+      // 다른 열린 item이 있으면 모두 닫기
+      docItems.forEach(function(item) {
+        if (item !== currentItem && item.classList.contains('open')) {
+          item.classList.remove('open');
+          setContentHeight(item);
+        }
+      });
+      
+      // 자신의 item은 toggle로 열림/닫힘
+      if (isOpen) {
+        currentItem.classList.remove('open');
+        setContentHeight(currentItem);
+      } else {
+        currentItem.classList.add('open');
+        setContentHeight(currentItem);
+        // 열릴 때만 스크롤
+        scrollToItem(currentItem);
+      }
+    });
+  });
+  
+  // doc-footer 내 checkbox 변경 이벤트
+  docItems.forEach(function(item) {
+    const checkbox = item.querySelector('.doc-footer input[type="checkbox"]');
+    if (checkbox) {
+      checkbox.addEventListener('change', function() {
+        if (this.checked) {
+          // data-agree를 true로 변경
+          item.setAttribute('data-agree', 'true');
+          
+          // 현재 item 닫기
+          item.classList.remove('open');
+          setContentHeight(item);
+          
+          // 다음 item 찾아서 열기
+          const currentIndex = Array.from(docItems).indexOf(item);
+          const nextItem = docItems[currentIndex + 1];
+          
+          if (nextItem) {
+            // 다른 열린 item이 있으면 모두 닫기
+            docItems.forEach(function(otherItem) {
+              if (otherItem !== nextItem && otherItem.classList.contains('open')) {
+                otherItem.classList.remove('open');
+                setContentHeight(otherItem);
+              }
+            });
+            // 다음 item 열기
+            nextItem.classList.add('open');
+            setContentHeight(nextItem);
+            // 다음 item이 열릴 때 스크롤
+            scrollToItem(nextItem);
+          }
+        } else {
+          // 체크 해제 시 data-agree를 false로 변경
+          item.setAttribute('data-agree', 'false');
+        }
+      });
+    }
+  });
+  
+  // 윈도우 리사이즈 시 열린 item의 높이 재조정
+  window.addEventListener('resize', function() {
+    docItems.forEach(function(item) {
+      if (item.classList.contains('open')) {
+        const content = item.querySelector('.doc-content');
+        if (content) {
+          content.style.height = content.scrollHeight + 'px';
+        }
+      }
+    });
+  });
+});
+  </script>
+</body>
+</html>
