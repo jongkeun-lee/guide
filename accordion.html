@@ -88,6 +88,36 @@
       height: calc(100vh - 60px);
       overflow-y: auto;
     }
+    .popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.popup-content button {
+  margin: 10px 5px 0 0;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.input-text.error {
+  border: 2px solid red;
+  outline: none;
+}
   </style>
 </head>
 <body>
@@ -168,34 +198,12 @@
       </div>
       <div class="doc-content">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-        <button class="select-all">select all</button>
-        <ul>
-          <li>
-            <input type="radio" name="item3-agree" id="item3-agree-1">
-            <label for="item3-agree-1">Doc Content Item 1</label>
-          </li>
-          <li>
-            <input type="radio" name="item3-agree" id="item3-agree-2">
-            <label for="item3-agree-2">Doc Content Item 1</label>
-          </li>
-          <li>
-            <input type="radio" name="item3-agree" id="item3-agree-3">
-            <label for="item3-agree-3">Doc Content Item 1</label>
-          </li>
-        </ul>
-        <div class="long-text">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        <div>
+          <p><input type="text" class="input-text" title="서비스 제목">에 대한 설명을 입력해주세요.</p>
+          <p><input type="text" class="input-text" title="내용 설명">을 입력해주세요.</p>
+          <p><input type="text" class="input-text" title="링크">를 입력해주세요.</p>
         </div>
+        
         <div class="doc-footer">
           <input type="checkbox" name="item3-footer" id="item3-footer-1">
           <label for="item3-footer-1">confirm</label>
@@ -257,6 +265,100 @@
       </div>
     </article>
   </section>
+  <div class="popup">
+    <div class="popup-content">
+      <h2>Popup</h2>
+      <p>빈칸의 값을 [value]에서 [title]로 바꾸시겠습니까?</p>
+      <button class="close-popup">예</button>
+      <button class="close-popup">아니오</button>
+    </div>
+  </div>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const popup = document.querySelector('.popup');
+  const popupContent = document.querySelector('.popup-content');
+  const popupButtons = document.querySelectorAll('.close-popup');
+  let currentInput = null;
+  
+  // popup 초기 상태: 숨김
+  if (popup) {
+    popup.style.display = 'none';
+  }
+  
+  // .input-text 요소들에 이벤트 리스너 추가
+  const inputTexts = document.querySelectorAll('.input-text');
+  
+  inputTexts.forEach(function(input) {
+    // focusout 이벤트
+    input.addEventListener('blur', function() {
+      const value = this.value.trim();
+      const title = this.getAttribute('title');
+      
+      if (!title) return;
+      
+      // value와 title이 다를 때
+      if (value !== title) {
+        // value가 있을 때만 popup 표시
+        if (value) {
+          currentInput = this;
+          showPopup(value, title);
+        } else {
+          // value가 없고 title과 다르면 (빈 값) error 처리하지 않음
+          this.classList.remove('error');
+        }
+      } else {
+        // value와 title이 같으면 error 제거
+        this.classList.remove('error');
+      }
+    });
+  });
+  
+  // popup 표시 함수
+  function showPopup(value, title) {
+    if (!popup || !popupContent) return;
+    
+    // popup-content의 텍스트 업데이트
+    const message = popupContent.querySelector('p');
+    if (message) {
+      message.textContent = `빈칸의 값을 [${value}]에서 [${title}]로 바꾸시겠습니까?`;
+    }
+    
+    // popup 표시
+    popup.style.display = 'flex';
+  }
+  
+  // popup 닫기 함수
+  function closePopup() {
+    if (popup) {
+      popup.style.display = 'none';
+    }
+    currentInput = null;
+  }
+  
+  // popup 버튼 이벤트
+  if (popupButtons.length >= 2) {
+    // "예" 버튼 (첫 번째 버튼)
+    popupButtons[0].addEventListener('click', function() {
+      if (currentInput) {
+        const title = currentInput.getAttribute('title');
+        if (title) {
+          currentInput.value = title;
+          currentInput.classList.remove('error');
+        }
+      }
+      closePopup();
+    });
+    
+    // "아니오" 버튼 (두 번째 버튼)
+    popupButtons[1].addEventListener('click', function() {
+      if (currentInput && currentInput.value) {
+        currentInput.classList.add('error');
+      }
+      closePopup();
+    });
+  }
+});
+  </script>
   <script>
 document.addEventListener('DOMContentLoaded', function() {
   const docItems = document.querySelectorAll('.doc-item');
